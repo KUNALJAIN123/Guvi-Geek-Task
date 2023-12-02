@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Delete Profile</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-icons.css">
+</head>
+<body>
+
+<?php if (!empty($row)): ?>
+
+    <div class="row col-lg-8 border rounded mx-auto mt-5 p-2 shadow-lg" id="profileId" data-id="<?= $row['id'] ?? 0 ?>">
+        <div class="col-md-4 text-center">
+            <img src="<?= get_image($row['image']) ?>" class="js-image img-fluid rounded"
+                 style="width: 180px;height:180px;object-fit: cover;">
+
+        </div>
+        <div class="col-md-8">
+
+            <div class="h2">Delete Profile</div>
+
+            <div class="alert-danger alert text-center my-2">Are you sure you want to delete this profile?!</div>
+
+            <form method="post" onsubmit="myaction.collect_data(event, 'profile-delete')">
+                <table class="table table-striped">
+                    <tr>
+                        <th colspan="2">User Details:</th>
+                    </tr>
+                    <tr>
+                        <th><i class="bi bi-envelope"></i> Email</th>
+                        <td>
+                            <div class="form-control"><?= $row['email'] ?></div>
+                            <div><small class="js-error js-error-email text-danger"></small></div>
+                        </td>
+                    </tr>
+                    <tr><th><i class="bi bi-person-circle"></i> First name</th>
+                        <td>
+                            <div class="form-control" name="firstname" ><?=$row['firstname']?></div>
+                            <div><small class="js-error js-error-firstname text-danger"></small></div>
+                        </td>
+                    </tr>
+                    <tr><th><i class="bi bi-person-square"></i> Last name</th>
+                        <td>
+                            <div class="form-control" ><?=$row['lastname']?></div>
+                            <div><small class="js-error js-error-lastname text-danger"></small></div>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div class="progress my-3 d-none">
+                    <div class="progress-bar" role="progressbar" style="width: 50%;">Working... 25%</div>
+                </div>
+
+                <div class="p-2">
+
+                    <button class="btn btn-danger float-end">Delete</button>
+
+                    <a href="index.php">
+                        <label class="btn btn-secondary">Back</label>
+                    </a>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+<?php else: ?>
+    <div class="text-center alert alert-danger">That profile was not found</div>
+    <a href="index.php">
+        <button class="btn btn-primary m-4">Home</button>
+    </a>
+<?php endif; ?>
+
+</body>
+</html>
